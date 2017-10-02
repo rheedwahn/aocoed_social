@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<div class="row article-feed" id="rep">
+	<div class="row" id="rep">
 		<div class="col-lg-8">
 			@if(!$statuses->count())
 				<p>There's no status on your timeline</p>
@@ -42,19 +42,19 @@
 							</div>
 							<form role="form" id="reply_form" action="{{ route('status.reply') }}" method="post">
 								<div class="form-group{{ $errors->has("reply-{$status->id}") ? ' has-error': '' }}">
-									<input type="hidden" id="statusId" value="{{ $status->id }}" class="form-control">
-									<textarea name="reply-{{ $status->id }}" id="reply" class="form-control" row="6" col="6" placeholder="Reply to this status"></textarea>
+									<input type="hidden" class="statusId" value="{{ $status->id }}" class="form-control">
+									<textarea name="reply-{{ $status->id }}" id="reply{{ $status->id }}" class="form-control this_reply" row="6" col="6" placeholder="Reply to this status"></textarea>
 									@if ($errors->has("reply-{$status->id}"))
 										<span class="help-block">{{ $errors->first("reply-{$status->id}") }}</span>
 									@endif
 								</div>
-								<input type="button" id="submit_reply" value="Reply" class="btn btn-default btn-sm">
+								<button type="button" statusId="{{ $status->id }}" id="submit_reply" class="btn btn-default btn-sm">Reply</button>
 								<input type="hidden" name="_token" value="{{ Session::token() }}">
 							</form>
 						{{-- </div> --}}
 					</div>
 				@endforeach
-				{{ $statuses->render() }}
+				<div class="pagination">{!! str_replace('/?', '?', $statuses->render()) !!}</div>
 			@endif	
 		</div>
 	</div>

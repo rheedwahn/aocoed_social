@@ -62,8 +62,10 @@ $(document).ready(function() {
 $("body").delegate("#submit_reply", "click", function(event) {
     event.preventDefault();
     var url = $("#reply_form").attr('action');
-    var statusId = $("#statusId").val();
-    var reply = $("#reply").val();
+    var statusId = $(this).attr("statusId");
+    var reply = $('#reply' + statusId).val();
+    console.log(reply);
+    
     
     $.post(url, {'id':statusId, 'reply':reply,'_token':$('input[name=_token]').val()}, function(data) {
             if(data.success === "Success"){

@@ -76,16 +76,16 @@
 	<script src="{{ asset('js/main.js') }}"></script> 
 	<script src="{{ asset('js/jquery.scroll.min.js') }}"></script>
 	<script type="text/javascript">
-        $('ul.pagination').hide();
+        $('.pagination').hide();
         $(function() {
-            $('.infinite-scroll').jscroll({
+            $('.article').jscroll({
                 autoTrigger: true,
-                loadingHtml: '<img class="center-block" src="/images/loading.gif" alt="Loading..." />', // MAKE SURE THAT YOU PUT THE CORRECT IMG PATH
+                loadingHtml: '<img class="center-block" src="loader.gif" alt="Loading..." />', // MAKE SURE THAT YOU PUT THE CORRECT IMG PATH
                 padding: 0,
                 nextSelector: '.pagination li.active + li a',
-                contentSelector: 'div.infinite-scroll',
+                contentSelector: 'div.article',
                 callback: function() {
-                    $('ul.pagination').remove();
+                    $('.pagination').remove();
                 }
             });
         });
